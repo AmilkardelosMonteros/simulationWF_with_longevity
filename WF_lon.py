@@ -4,8 +4,8 @@ import random
 from math import floor
 import matplotlib.pyplot as plt
 N = 2000
-s1 = 1/N
-s2 = 0
+s0 = 0
+s1 = 0
 def grafica(x,y):
     plt.plot(x,y,color='blue')
     plt.xlabel('t')
@@ -43,7 +43,7 @@ def WF_lon(d1,a1,d0,a0,n):
         envejecen1 = np.random.binomial(N*proceso_x1_f[-1],a1)
         envejecen0 = np.random.binomial(N*proceso_x0_f[-1],a0)
         I =  no_mueren_1 + no_mueren_0 + envejecen1 + envejecen0
-        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s2)*proceso_x0_f[-1])
+        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s0)*proceso_x0_f[-1])
         proceso_x1_I.append((no_mueren_1 + envejecen1)/N)
         proceso_x0_I.append((no_mueren_0 + envejecen0)/N)
         numero = (np.random.binomial(N-I,p))
@@ -63,7 +63,7 @@ def WF_lon_completo(d1,a1,d0,a0):
         envejecen1 = np.random.binomial(N*proceso_x1_f[-1],a1)
         envejecen0 = np.random.binomial(N*proceso_x0_f[-1],a0)
         I =  no_mueren_1 + no_mueren_0 + envejecen1 + envejecen0
-        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s2)*proceso_x0_f[-1])
+        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s0)*proceso_x0_f[-1])
         proceso_x1_I.append((no_mueren_1 + envejecen1)/N)
         proceso_x0_I.append((no_mueren_0 + envejecen0)/N)
         numero = (np.random.binomial(N-I,p))
@@ -72,13 +72,13 @@ def WF_lon_completo(d1,a1,d0,a0):
     return [proceso_x1_I,proceso_x0_I,proceso_x1_f,proceso_x0_f] 
 
     
-#W = WF_lon_completo(0.2,0.3,0.4,0.1)
-#Y1 = W[0]
-#Y2 = W[1]
-#Y3 = W[2]
-#Y4 = W[3]
-#X= np.linspace(0,len(Y1),len(Y1))
-#grafica1(X,Y1,Y2,Y3,Y4)
+W = WF_lon_completo(0.2,0.3,0.4,0.1)
+Y1 = W[0]
+Y2 = W[1]
+Y3 = W[2]
+Y4 = W[3]
+X= np.linspace(0,len(Y1),len(Y1))
+grafica1(X,Y1,Y2,Y3,Y4)
 
 def ganador(d1,a1,d0,a0):
     proceso_x1_I= [0.25] #x1_I,x0_I,x1_f,x0_f
@@ -92,8 +92,7 @@ def ganador(d1,a1,d0,a0):
         envejecen1 = np.random.binomial(N*proceso_x1_f[-1],a1)
         envejecen0 = np.random.binomial(N*proceso_x0_f[-1],a0)
         I =  no_mueren_1 + no_mueren_0 + envejecen1 + envejecen0
-        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s2)*proceso_x0_f[-1])
-        
+        p = ((1+s1)*proceso_x1_f[-1])/((1+s1)*proceso_x1_f[-1] + (1+s0)*proceso_x0_f[-1])
         proceso_x1_I[-1] = (no_mueren_1 + envejecen1)/N
         proceso_x0_I[-1] = (no_mueren_0 + envejecen0)/N
         numero = (np.random.binomial(N-I,p))
@@ -104,7 +103,7 @@ def ganador(d1,a1,d0,a0):
     else:
         return 1
 
-print(ganador(0.1,0.3,0.1,0))
+#print(ganador(0.1,0.3,0.1,0))
 def distribucion(mu):
     x = mu*np.random.uniform(0,1)
     y = mu*np.random.uniform(0,1)
@@ -163,3 +162,4 @@ def color(caminata,rep):
             
 #color(C[0],C[1])        
 #dibuja_caminata(C) 
+
