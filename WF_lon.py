@@ -3,8 +3,8 @@ import numpy as np
 import random 
 from math import floor
 import matplotlib.pyplot as plt
-N = 100
-s1 = 0
+N = 2000
+s1 = 1/N
 s2 = 0
 def grafica(x,y):
     plt.plot(x,y,color='blue')
@@ -14,7 +14,7 @@ def grafica(x,y):
     plt.show()
 
 def graficaC(x,y):
-    plt.plot(x,y,color='blue')
+    plt.plot(x,y)
     plt.xlabel('t')
     plt.ylabel('Zt')
     plt.title('Caminata aleatoria')
@@ -102,26 +102,31 @@ def ganador(d1,a1,d0,a0):
         return 0
     else:
         return 1
-   
-def distribucion2():
-        v = True
-        while v:
-                x = np.random.uniform(0,1)
-                y = np.random.uniform(0,1)
-                if x**2 + y**2 <= 25:
-                    v = False
-        return x,y
 
+print(ganador(0.1,0.3,0.1,0))
+def distribucion(mu):
+    x = mu*np.random.uniform(0,1)
+    y = mu*np.random.uniform(0,1)
+    #x = np.random.beta(2,2)
+    #y = np.random.beta(2,2)
+    return x,y
+    
 def caminata(n):
     trayectoria = [[0,0]] #di,ai
+    rep = 0 
     for i in range(n):
-        retador = distribucion2()
-        if ganador(trayectoria[-1][0],trayectoria[-1][0],retador[0],retador[1]) == 0:
+        retador = distribucion(1)
+        if ganador(trayectoria[-1][0],trayectoria[-1][1],retador[0],retador[1]) == 0:
             trayectoria.append([retador[0],retador[1]])
         else:
-            trayectoria.append([trayectoria[-1][0],trayectoria[-1][0]])
+            rep = rep + 1
 
-    return trayectoria
+        #else:
+         #   trayectoria.append([trayectoria[-1][0],trayectoria[-1][1]])
+    
+        
+
+    return trayectoria,rep
 
 
 def dibuja_caminata(trayectoria):
@@ -133,5 +138,30 @@ def dibuja_caminata(trayectoria):
                 y.append(v[1])
         graficaC(x,y)
         
-#C = caminata(20)
-#dibuja_caminata(C)
+C = caminata(100)
+def color(caminata,rep):
+    x_rojo = []
+    y_rojo = []
+    x_azul = []
+    y_azul = []
+    j = 0
+    n = len(caminata)
+    for i in range(n):
+        if caminata[i][1] >= caminata[i][0]:
+            x_rojo.append(caminata[i][0])
+            y_rojo.append(caminata[i][1])
+        else:
+            x_azul.append(caminata[i][0])
+            y_azul.append(caminata[i][1])
+    
+    plt.plot(x_rojo,y_rojo,'ro')
+    plt.plot(x_azul,y_azul,'bo')
+    plt.title('caminata con_'+str(n + rep)+'pasos' + str(rep) + '_repeticiones_' + str(len(x_azul))+'_azules y_ '+ str(len(x_rojo))+'_rojos' )
+    plt.show()
+            
+            
+color(C[0],C[1])        
+#dibuja_caminata(C) 
+
+
+  
