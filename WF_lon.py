@@ -86,6 +86,7 @@ def ganador(d1,a1,d0,a0):
     proceso_x1_f = [0.25]
     proceso_x0_f = [0.25]
     while proceso_x1_f[-1] != 0 and proceso_x0_f[-1] != 0:
+        print(proceso_x1_f[-1])
         no_mueren_1 = np.random.binomial(N*proceso_x1_I[-1],1-d1)
         no_mueren_0 = np.random.binomial(N*proceso_x0_I[-1],1-d0)
         envejecen1 = np.random.binomial(N*proceso_x1_f[-1],a1)
@@ -138,7 +139,7 @@ def dibuja_caminata(trayectoria):
                 y.append(v[1])
         graficaC(x,y)
         
-C = caminata(100)
+#C = caminata(100)
 def color(caminata,rep):
     x_rojo = []
     y_rojo = []
@@ -160,8 +161,5 @@ def color(caminata,rep):
     plt.show()
             
             
-color(C[0],C[1])        
+#color(C[0],C[1])        
 #dibuja_caminata(C) 
-
-
-  
