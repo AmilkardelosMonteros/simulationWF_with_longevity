@@ -25,11 +25,13 @@ def ganador_wf_long(parametros):
         envejecen1 = np.random.RandomState().binomial(N*proceso_x1_f,a1)
         envejecen0 = np.random.RandomState().binomial(N*proceso_x0_f,a0)
         I =  no_mueren_1 + no_mueren_0 + envejecen1 + envejecen0
-        p = ((1+s1)*proceso_x1_f)/((1+s1)*proceso_x1_f + (1+s0)*proceso_x0_f)
+        x1F = proceso_x1_f/(proceso_x1_f + proceso_x0_f)
+        #p = ((1+s1)*proceso_x1_f)/((1+s1)*proceso_x1_f + (1+s0)*proceso_x0_f)
+        p = ((1+s1)*x1F)/((1+s1)*x1F + (1+s0)*(1-x1F))
         proceso_x1_I =  (no_mueren_1 + envejecen1)/N 
         proceso_x0_I = (no_mueren_0 + envejecen0)/N 
         numero = np.random.RandomState().binomial(N-I,p)
-        proceso_x1_f =  numero/N 
+        proceso_x1_f =  numero/N
         proceso_x0_f =  1- (numero + ((no_mueren_1 + envejecen1)) + ((no_mueren_0 + envejecen0)))/N
     if proceso_x1_f != 0:
         return 1
