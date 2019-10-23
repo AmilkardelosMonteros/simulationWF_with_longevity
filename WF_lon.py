@@ -15,10 +15,10 @@ def ganador_wf_long(parametros):
     d0 = 0
     a0 = 0
     s0 = 0
-    proceso_x1_I= 0.25 #x1_I,x0_I,x1_f,x0_f
-    proceso_x0_I = 0.25
-    proceso_x1_f = 0.25
-    proceso_x0_f = 0.25
+    proceso_x1_I= 0 #x1_I,x0_I,x1_f,x0_f
+    proceso_x0_I = 0
+    proceso_x1_f = 0.5
+    proceso_x0_f = 0.5
     while proceso_x1_f != 0 and proceso_x0_f != 0:
         no_mueren_1 = np.random.RandomState().binomial(N*proceso_x1_I,1-d1)
         no_mueren_0 = np.random.RandomState().binomial(N*proceso_x0_I,1-d0)
