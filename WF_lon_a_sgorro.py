@@ -30,7 +30,7 @@ def ganador_wf_long(parametros):
         p = ((1+s1)*x1F)/((1+s1)*x1F + (1+s0)*(1-x1F))
         proceso_x1_I =  (no_mueren_1 + envejecen1)/N
         proceso_x0_I = (no_mueren_0 + envejecen0)/N
-        numero = np.random.RandomState().binomial(N-I,p)
+        numero = np.random.binomial(N-I,p)
         proceso_x1_f =  numero/N
         proceso_x0_f =  1- (numero + ((no_mueren_1 + envejecen1)) + ((no_mueren_0 + envejecen0)))/N
     if proceso_x1_f != 0:
