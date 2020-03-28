@@ -38,8 +38,6 @@ def ganador_wf_long(parametros):
     else:
 	return 0
 
-#Para que las graficas se puedan leer se fijan 4 parametros: s0,a0,d0,d1 y los demas los variamos en R2 y para cada a1,s1 se estima la probabilidad de fijacion, para cada a1,s1 necesitamos hacer muchas repeticiones y para hacer esto un poco mas rapido u$
-
 def proba_long(s1,a1,repeticiones):
     info  = []
     v = [s1,a1]
